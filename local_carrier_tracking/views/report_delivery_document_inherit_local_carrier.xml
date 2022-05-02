@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="report_delivery_document_inherit_sale_stock" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[@name='div_sched_date']" position="after">
+            <div t-if="o.picking_type_id.code == 'outgoing' and o.local_carrier" class="col-auto">
+                <strong>Carrier:</strong>
+                <p t-field="o.local_carrier" />
+            </div>
+            <div t-if="o.tracking_url" class="col-auto">
+                <strong>Tracking URL:</strong>
+                <p t-field="o.tracking_url" />
+            </div>
+        </xpath>
+        <xpath expr="//table[@name='stock_move_line_table']/thead/tr" position="after">
+            <br />
+            <br />
+            <h2>Términos de entrega:</h2>
+            <br />
+            <p>
+                <font style="font-size: 14px;">Tu pedido será preparado para envío y tomará
+                    <b>24 horas hábiles</b> a partir
+                de la fecha en que realizaste el pago. Si has elegido la opción de recolección en tienda, considera que
+                nuestros horarios de entrega son de
+                    <b> lunes a viernes de 11 am a 3 pm y de 4 pm a 6 pm</b>. Si has
+                elegido la opción de envío a domicilio, tu paquete será enviado posterior a su preparación. Una vez que
+                el paquete ha sido enviado, podrás dar seguimiento con el número de rastreo que se encuentra en este
+                documento. No nos hacemos responsables por retrasos, pérdida o daños en el envío. Toda reclamación o
+                queja tendrá que hacerse directamente con el proveedor. Una vez que recibas tu pedido, te recomendamos
+                revises las instrucciones de uso de los productos que recibas, ya que de un correcto uso de ellos
+                depende la aceptación de una garantía en caso de defectos en el lote de dicho producto.
+                </font>
+            </p>
+        </xpath>
+    </template>
+</odoo>

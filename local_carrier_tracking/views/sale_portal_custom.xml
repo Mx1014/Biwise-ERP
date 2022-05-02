@@ -1,0 +1,26 @@
+<odoo>
+    <template id="delivery_sale_order_portal_content_inherit_sale_stock_inherit_website_sale_delivery_custom"
+              name="Custom shipping tracking on orders followup"
+              inherit_id="sale_stock.sale_order_portal_content_inherit_sale_stock">
+        <xpath expr="//div[hasclass('o_sale_stock_picking')]/div" position="after">
+            <div t-if="i.carrier_tracking_ref" class="small d-lg-inline-block">
+                <strong>Seguimiento:</strong>
+                <t t-set="multiple_carrier_tracking" t-value="i.get_multiple_carrier_tracking()"/>
+                <t t-if="multiple_carrier_tracking">
+                     <t t-foreach="multiple_carrier_tracking" t-as="line">
+                         <a t-att-href="line[1]" target="_blank"><span t-esc="line[0]"/></a>
+                         <span t-if="not line_last"> + </span>
+                     </t>
+                </t>
+                <t t-else="">
+                    <t t-if="i.tracking_url">
+                        <a t-att-href="i.tracking_url" target="_blank"><span t-field="i.carrier_tracking_ref" style="color:blue"/></a>
+                    </t>
+                    <t t-else="">
+                        <span t-field="i.local_carrier"/> <span t-field="i.carrier_tracking_ref"/>
+                    </t>
+                </t>
+            </div>
+        </xpath>
+    </template>
+</odoo>
